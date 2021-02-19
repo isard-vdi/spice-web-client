@@ -41,11 +41,11 @@ function getParameter(name) {
 	var match = document.cookie.match(new RegExp('(^| )' + 'isard' + '=([^;]+)'));
 	if (!match) return '';
 
-	return JSON.parse(decodeURIComponent(atob(match[2])))['web_viewer'][name];
+	return JSON.parse(atob(match[2]))['web_viewer'][name];
 }
 
 function getKeyboardLayout() {
-	return navigator.language.split('-')[1].toLowerCase()
+	return 'es'
 }
 
 wdi.Debug.debug = false; //enable logging to javascript console
@@ -219,11 +219,11 @@ function start () {
 		'callback': f,
 		'context': this,
 		'host': getParameter('host') || '',
-		'port': getParameter('port') || 8000,
-		'protocol': getURLParameter('protocol') || 'wss',
+		'port': getParameter('port') || '',
+		'protocol': 'wss', //getURLParameter('protocol') || 'wss',
 		'token': getParameter('token') || '',
-		'vmHost': getURLParameter('vmhost') || false,
-		'vmPort': getURLParameter('vmport') || false,
+		'vmHost': getParameter('vmHost') || '', //getURLParameter('vmhost') || false,
+		'vmPort': getParameter('vmPort') - 2 || '', //getURLParameter('vmport') || false,
 		'useBus': false,
 		'busHost': '',
 		'busPort': 61613,
